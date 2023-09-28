@@ -47,24 +47,50 @@ bool hasWon = false;
 
 while(!hasWon)
 {
-    Console.WriteLine($"{player1.name} var god välj ditt drag genom att skriva respektive siffra\n{(int)Drag.Sten}. {Drag.Sten}\n{(int)Drag.Sax}. {Drag.Sax}\n{(int)Drag.Påse}. {Drag.Påse}");
-    player1moveEnum = Enum.Parse<Drag>(Console.ReadLine());
-    Console.Clear();
-    Console.WriteLine($"{player2.name} var god välj ditt drag genom att skriva respektive siffra\n{(int)Drag.Sten}. {Drag.Sten}\n{(int)Drag.Sax}. {Drag.Sax}\n{(int)Drag.Påse}. {Drag.Påse}");
-    player2moveEnum = Enum.Parse<Drag>(Console.ReadLine());
-    Console.Clear();
-    Round(player1moveEnum, player2moveEnum);
-    if (Round(player1moveEnum, player2moveEnum) == player1.name)
+    for (int rounds = 0; rounds < 3; rounds++)
     {
-        player1.points++;
-        Console.WriteLine($"{player1.name} har vunnit rundan!\nResultatet är just nu följande:\n{player1.name}: {player1.points}\n{player2.name}: {player2.points}");
-    }
-    else
-    {
-        player2.points++;
-        Console.WriteLine($"{player2.name} har vunnit rundan!\nResultatet är just nu följande:\n{player1.name}: {player1.points}\n{player2.name}: {player2.points}");
+        Console.WriteLine($"{player1.name} var god välj ditt drag genom att skriva respektive siffra\n{(int)Drag.Sten}. {Drag.Sten}\n{(int)Drag.Sax}. {Drag.Sax}\n{(int)Drag.Påse}. {Drag.Påse}");
+        player1moveEnum = Enum.Parse<Drag>(Console.ReadLine());
+        Console.Clear();
+        Console.WriteLine($"{player2.name} var god välj ditt drag genom att skriva respektive siffra\n{(int)Drag.Sten}. {Drag.Sten}\n{(int)Drag.Sax}. {Drag.Sax}\n{(int)Drag.Påse}. {Drag.Påse}");
+        player2moveEnum = Enum.Parse<Drag>(Console.ReadLine());
+        Console.Clear();
+        Round(player1moveEnum, player2moveEnum);
 
+        if (Round(player1moveEnum, player2moveEnum) == player1.name)
+        {
+            player1.points++;
+            Console.WriteLine($"{player1.name} har vunnit rundan!\nResultatet är just nu följande:\n{player1.name}: {player1.points}\n{player2.name}: {player2.points}");
+        }
+        if (Round(player1moveEnum, player2moveEnum) == player2.name)
+        {
+            player2.points++;
+            Console.WriteLine($"{player2.name} har vunnit rundan!\nResultatet är just nu följande:\n{player1.name}: {player1.points}\n{player2.name}: {player2.points}");
+
+        }
+        if (Round(player1moveEnum, player2moveEnum) == "Oavgjort")
+        {
+            Console.WriteLine($"Rundan blev oavgjord!\nResultatet är just nu följande:\n{player1.name}: {player1.points}\n{player2.name}: {player2.points}");
+        }
+        if (rounds == 2 && player1.points < player2.points) // Vrf crashar && programmet?
+        {
+            Console.Clear();
+
+            Console.WriteLine($"Spelare {player2.name} har vunnit!");
+            hasWon = false;
+
+        }
+        if (rounds == 2 && player1.points > player2.points) // Vrf crashar && programmet?
+        {
+            Console.Clear();
+
+            Console.WriteLine($"Spelare {player1.name} har vunnit!");
+            hasWon = false;
+
+
+        }
     }
+    
 }
 
 
